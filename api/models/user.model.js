@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   phoneNumber: {
     type: String,
@@ -30,6 +29,10 @@ const UserSchema = new mongoose.Schema({
   },
   saleNumber: {
     type: Number,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
   },
 });
 

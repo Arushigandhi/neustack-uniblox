@@ -1,7 +1,8 @@
-const UserModel = require("../models/User.model");
+const UserModel = require("../models/user.model");
 
 exports.SignUp = async (req, res, next) => {
-  const { phoneNumber, name, password, location } = req.body;
+  console.log("reaching");
+  const { phoneNumber, name, password, location, isAdmin } = req.body;
 
   const phoneNumberCheck = await UserModel.find({
     phoneNumber,
@@ -12,7 +13,13 @@ exports.SignUp = async (req, res, next) => {
       message: "phone number already exists!",
     });
   }
-  const newUser = new UserModel({ phoneNumber, name, password, location });
+  const newUser = new UserModel({
+    phoneNumber,
+    name,
+    password,
+    location,
+    isAdmin,
+  });
   console.log("new user", newUser);
   newUser
     .save()

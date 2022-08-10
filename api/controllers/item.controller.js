@@ -1,5 +1,5 @@
 const DiscountModel = require("../models/discount.model");
-const ItemModel = require("../models/Item.model");
+const ItemModel = require("../models/items.model");
 const PurchaseModel = require("../models/purchase.model");
 const UserModel = require("../models/user.model");
 

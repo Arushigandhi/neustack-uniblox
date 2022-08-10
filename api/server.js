@@ -9,7 +9,7 @@ dotenv.config({
 
 const app = express();
 
-const whitelist = ["*"];
+var whitelist = ["http://localhost:3000"];
 
 var corsOptions = {
   origin: function (origin, callback) {
@@ -62,7 +62,11 @@ app.get("/welcome", (req, res, next) => {
     message: "Welcome to Uniblox's Neustack api!",
   });
 });
-const PORT = process.env.PORT || 8010;
+app.use("/api/auth", require("./routes/user.routes"));
+app.use("/api/product", require("./routes/item.routes"));
+app.use("/api/admin", require("./routes/admin.routes"));
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
   await ConnectToDB();
   console.log("Server started");
