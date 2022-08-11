@@ -15,7 +15,7 @@ export default function login() {
     },
     onSuccess: (data) => {
       message.success("Registered successfully!");
-      router.push("/seller/dashboard");
+      router.push("/login");
     },
   });
 
@@ -28,6 +28,9 @@ export default function login() {
       <Card hoverable className={Styles.card}>
         <h1>Register to your application!</h1>
         <Form layout="vertical" onFinish={onRegSubmit}>
+          <Form.Item name="name">
+            <Input placeholder="Name" size="large" />
+          </Form.Item>
           <Form.Item name="phoneNumber">
             <Input placeholder="Phone Number" size="large" />
           </Form.Item>

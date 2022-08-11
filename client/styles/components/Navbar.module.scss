@@ -1,0 +1,104 @@
+@import "../variables";
+
+.navbarContainer {
+  height: 80px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  transition: all 0.4s ease;
+  padding: 0rem;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+
+  .wrapper {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 4rem;
+    transition: all 0.3s ease;
+    @include responsive(mobile4) {
+      padding: 0rem;
+      justify-content: center;
+    }
+
+    .logo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      @include responsive(mobile4) {
+        display: none;
+      }
+    }
+
+    .mainNav {
+      display: flex;
+      align-items: center;
+      transition: all 0.4s ease-in;
+      @include responsive(mobile4) {
+        padding: 1rem;
+      }
+
+      .navLink {
+        margin-right: 2rem;
+        position: relative;
+        color: $neustack-purple;
+        font-weight: 500;
+        text-decoration: none;
+        font-size: nth($fontSize, 3);
+        @include responsive(mobile4) {
+          margin-right: 3rem;
+        }
+      }
+
+      .button {
+        background-color: $neustack-purple;
+        color: #fff;
+        border: none;
+        margin-right: 2rem;
+        border-radius: 0.3rem;
+        padding: 0rem 2rem;
+        @include responsive(mobile4) {
+          padding: 0rem 1rem;
+          margin-right: 0rem;
+        }
+      }
+    }
+  }
+}
+
+.footerContainer {
+  height: 60px;
+  background-color: #fff;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  transition: all 0.4s ease;
+  padding: 0rem;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+
+  .wrapper {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0rem 4rem;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
+    @include responsive(mobile4) {
+      padding: 0;
+    }
+
+    p {
+      margin-bottom: 0;
+      color: $neustack-purple;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}

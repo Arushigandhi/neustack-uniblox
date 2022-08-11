@@ -22,13 +22,9 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-  location: {
-    type: String,
-    default: "",
-    required: false,
-  },
   saleNumber: {
     type: Number,
+    default: 0,
   },
   isAdmin: {
     type: Boolean,

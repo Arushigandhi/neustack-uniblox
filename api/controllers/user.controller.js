@@ -1,9 +1,9 @@
 const UserModel = require("../models/user.model");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.SignUp = async (req, res, next) => {
-  console.log("reaching");
-  const { phoneNumber, name, password, location, isAdmin } = req.body;
-
+  const { phoneNumber, name, password, isAdmin } = req.body;
   const phoneNumberCheck = await UserModel.find({
     phoneNumber,
   });
@@ -17,10 +17,8 @@ exports.SignUp = async (req, res, next) => {
     phoneNumber,
     name,
     password,
-    location,
     isAdmin,
   });
-  console.log("new user", newUser);
   newUser
     .save()
     .then(async (n) => {
@@ -54,11 +52,9 @@ exports.SignIn = (req, res, next) => {
         const check = await user.MatchPassword(password);
 
         if (!check) {
-          console.log("Error");
-
           return res.status(500).json({
             success: false,
-            message: "Unknown server error!",
+            message: "Doesn't match error!",
           });
         }
 

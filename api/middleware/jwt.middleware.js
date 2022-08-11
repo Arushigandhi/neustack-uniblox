@@ -18,7 +18,6 @@ const CheckJWT = (req, res, next) => {
     const { userData } = jwt.verify(token, process.env.JWT_HASH);
     // res.locals.key = userData.userData.password.substr(-16);
     // res.locals.email = userData.userData.email;
-    console.log(userData);
     // console.log(userData._id);
     res.locals.uid = userData._id;
 

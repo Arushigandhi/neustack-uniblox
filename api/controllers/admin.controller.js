@@ -2,16 +2,16 @@ const PurchaseModel = require("../models/purchase.model");
 const DiscountModel = require("../models/discount.model");
 
 exports.AddDiscount = async (req, res, next) => {
-  const { discount_code, discount_value } = req.body;
-  if (!discount_code || !discount_value)
+  const { discount_name, value } = req.body;
+  if (!discount_name || !value)
     return res.status(400).json({
       success: false,
       message: "Required values not provided!",
     });
 
   const newDiscount = new DiscountModel({
-    discount_code,
-    discount_value,
+    discount_name,
+    value,
   });
 
   newDiscount.save();

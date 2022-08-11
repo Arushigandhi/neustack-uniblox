@@ -88,6 +88,48 @@ exports.AddToCart = async (req, res, next) => {
     });
 };
 
+exports.GetAllItemsFromCart = async (req, res, next) => {
+  const uid = res.locals.uid;
+  const user = await UserModel.findById({
+    _id: uid,
+  });
+  if (!user)
+    return res.status(500).json({
+      success: false,
+      message: "User not found!",
+    });
+  const items = await ItemModel.find({
+    _id: { $in: user.cart },
+  });
+  if (!items)
+    return res.status(500).json({
+      success: false,
+      message: "Items not found!",
+    });
+  return res.status(200).json({
+    success: true,
+    items,
+  });
+};
+
+exports.GetAllDiscounts = async (req, res, next) => {
+  DiscountModel.find()
+    .then((discounts) => {
+      return res.status(200).json({
+        success: true,
+        discounts,
+      });
+    })
+    .catch((err) => {
+      console.log("Error!");
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Unknown server error!",
+      });
+    });
+};
+
 exports.Checkout = async (req, res, next) => {
   const uid = res.locals.uid;
   if (!uid)
@@ -98,27 +140,24 @@ exports.Checkout = async (req, res, next) => {
   const user = await UserModel.findById({
     _id: uid,
   });
-  user.orders.push(user.cart);
-  user.cart = [];
   let totalPrice = 0;
   const discount = await DiscountModel.findById(req.body.discount_id);
-  user.orders.forEach((order) => {
-    order.forEach((item) => {
-      totalPrice += item.price;
-      const newPurchase = new PurchaseModel({
-        name: item.name,
-        item_id: item._id,
-        quantity: item.qty,
-        amount: item.price * item.qty,
-        discount_id: discount._id,
-        discount_value: discount.value,
-      });
-      newPurchase.save();
+  user.cart.forEach(async (item) => {
+    const product = await ItemModel.findById(item);
+    console.log(product);
+    totalPrice += product.price;
+    const newPurchase = new PurchaseModel({
+      name: product.name,
+      item_id: product._id,
+      quantity: product.qty,
+      amount: product.price * product.qty,
+      discount_id: discount.discount_name,
+      discount_value: discount.value,
     });
+    newPurchase.save();
   });
-  if (user.saleNumber % 3 === 0 && discount) {
-    const discount = await DiscountModel.findById(discount_id);
-    totalPrice = totalPrice - totalPrice * discount.value;
+  if (discount) {
+    totalPrice = totalPrice - totalPrice * parseInt(discount.value);
   }
   await user
     .save()

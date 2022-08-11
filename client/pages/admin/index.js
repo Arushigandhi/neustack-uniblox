@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, Row, Form, Input, Button, message, Col } from "antd";
-import Styles from "../styles/pages/Login.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import Styles from "../../styles/pages/Login.module.scss";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { SignIn } from "../services/auth.service";
 import { login } from "store/user.slice";
+import { SignIn } from "services/auth.service";
 
-export default function LoginPage() {
+export default function AdminLogin() {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ export default function LoginPage() {
     },
     onSuccess: (data) => {
       message.success("Logged in successfully!");
-      router.push("/dashboard");
+      router.push("/admin/dashboard");
       dispatch(login(data));
     },
   });
@@ -30,7 +30,7 @@ export default function LoginPage() {
   return (
     <Row justify="center" align="middle" className={Styles.container}>
       <Card hoverable className={Styles.card}>
-        <h1>Login to your application!</h1>
+        <h1>Admin Login</h1>
         <Form layout="vertical" onFinish={onLoginSubmit}>
           <Form.Item name="phoneNumber">
             <Input placeholder="Phone Number" size="large" />
@@ -43,15 +43,9 @@ export default function LoginPage() {
               Login
             </Button>
           </div>
-          <p>
-            Don't have an account?{" "}
-            <span>
-              <a href="/register">Register Now</a>
-            </span>
-          </p>
           <Col>
-            <div>Use Sample Credentials:</div>
-            <div>Phone Number: 9323017320</div>
+            <div>Use Admin Credentials:</div>
+            <div>Phone Number: 8017727622</div>
             <div>Password: Aryamann</div>
           </Col>
         </Form>

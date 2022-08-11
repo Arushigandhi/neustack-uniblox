@@ -3,27 +3,22 @@ const mongoose = require("mongoose");
 const PurchaseSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   item_id: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
   },
   quantity: {
-    type: Number,
-    required: true,
+    type: String,
   },
   amount: {
-    type: Number,
-    required: true,
+    type: String,
+    default: 0,
   },
   discount_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    type: String,
   },
   discount_value: {
-    type: Number,
-    required: true,
+    type: String,
   },
 });
 

@@ -1,0 +1,26 @@
+@import "../variables";
+
+.container {
+  width: 80%;
+  margin: 5rem auto;
+
+  .outlineButton {
+    border: 2px solid $neustack-purple;
+    background: transparent;
+    color: $neustack-purple;
+    font-size: nth($fontSize, 3);
+    font-weight: 500;
+    border-radius: 6px;
+    height: 2.5rem;
+    width: 20rem;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: 5rem;
+
+    &:hover {
+      background: $neustack-purple;
+      color: #fff !important;
+      border: 2px solid $neustack-purple;
+    }
+  }
+}

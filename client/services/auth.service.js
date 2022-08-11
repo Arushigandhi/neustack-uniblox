@@ -8,6 +8,5 @@ export const SignIn = async (body) => {
 
 export const SignUp = async (body) => {
   const response = await axios.post(`${BACKEND_URL}/auth/sign-up`, body);
-  console.log(body, BACKEND_URL);
   return response.data;
 };
